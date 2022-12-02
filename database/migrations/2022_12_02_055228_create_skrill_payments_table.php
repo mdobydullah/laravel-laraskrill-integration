@@ -17,10 +17,10 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('transaction_id');
             $table->string('mb_transaction_id');
-            $table->string('invoice_id');
-            $table->string('order_from');
-            $table->string('customer_id');
-            $table->string('customer_email');
+            $table->string('invoice_id')->nullable();
+            $table->string('order_from')->nullable();
+            $table->string('customer_id')->nullable();
+            $table->string('customer_email')->nullable();
             $table->string('biller_email');
             $table->float('amount');
             $table->string('currency');

@@ -24,9 +24,9 @@
                 <tr>
                     <td>{{ $payment->id }}</td>
                     <td>{{ $payment->mb_transaction_id }}</td>
-                    <td>{{ $payment->amount }} ({{ $skrill_payment->currency }})</td>
+                    <td>{{ $payment->amount }} ({{ $payment->currency }})</td>
                     <td>{{ $payment->customer_email }}</td>
-                    <td>{{ $payment->created_at }}</td>
+                    <td>{{ $payment->created_at->format('d M, Y - H:i A') }}</td>
                 </tr>
             @endforeach
         @endif

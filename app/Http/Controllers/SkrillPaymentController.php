@@ -60,13 +60,17 @@ class SkrillPaymentController extends Controller
     {
         // create object instance of SkrillRequest
         $this->skrilRequest->prepare_only = 1;
-        // $this->skrilRequest->transaction_id = 'STTX0001'; // generate transaction id (optional)
         $this->skrilRequest->amount = '10.50';
         $this->skrilRequest->currency = 'USD';
         $this->skrilRequest->language = 'EN';
-        $this->skrilRequest->merchant_fields = 'site_name, customer_email';
+
+        // custom fields (optional)
+        $this->skrilRequest->merchant_fields = 'site_name, invoice_id, customer_id, customer_email';
         $this->skrilRequest->site_name = 'Shout.dev';
+        $this->skrilRequest->invoice_id = 'INV_' . strtoupper(str()->random(10));
+        $this->skrilRequest->customer_id = 1001;
         $this->skrilRequest->customer_email = 'customer@shouts.dev';
+
         $this->skrilRequest->detail1_description = 'Product ID:';
         $this->skrilRequest->detail1_text = '101';
 
@@ -125,14 +129,15 @@ class SkrillPaymentController extends Controller
         // skrill data - get more fields from Skrill Quick Checkout Integration Guide 7.9 (page 23)
         $transaction_id = $request->transaction_id;
         $mb_transaction_id = $request->mb_transaction_id;
-        $invoice_id = $request->invoice_id; // custom field
-        $order_from = $request->order_from; // custom field
-        $customer_email = $request->customer_email; // custom field
         $biller_email = $request->pay_from_email;
-        $customer_id = $request->customer_id;
         $amount = $request->amount;
         $currency = $request->currency;
         $status = $request->status;
+
+        $invoice_id = $request->invoice_id ?? null; // custom field
+        $order_from = $request->site_name ?? null; // custom field
+        $customer_id = $request->customer_id ?? null; // custom field
+        $customer_email = $request->customer_email ?? null; // custom field
 
         // status message
         if ($status == '-2') {

@@ -18,7 +18,7 @@
         <a href="https://shouts.dev/" target="_blank">
             <img src="{{ asset('logo.png') }}" alt="logo"><br>
         </a>
-        <span class="text-secondary">Laravel Skrill Payment Integration with LaraSkrill</span>
+        <span class="text-secondary">Laravel Skrill Integration with LaraSkrill</span>
     </div>
 
     <div class="mt-3">
