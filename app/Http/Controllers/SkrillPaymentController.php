@@ -23,8 +23,8 @@ class SkrillPaymentController extends Controller
         $this->skrilRequest->return_url = 'https://laraskrill.test/payment-completed';
         $this->skrilRequest->cancel_url = 'https://laraskrill.test/payment-cancelled';
         $this->skrilRequest->logo_url = 'https://cdn.shouts.dev/images/shoutsdev.png';
-        $this->skrilRequest->status_url = 'email or ipn'; // you can use https://webhook.site webhook url as IPN. It is a free service to test webhook.
-        // $this->skrilRequest->status_url2 = 'email or ipn';
+        $this->skrilRequest->status_url = 'your email or ipn url'; // you can use https://webhook.site webhook url as IPN. It is a free service to test webhook.
+        // $this->skrilRequest->status_url2 = 'your email or ipn url';
     }
 
     /**
@@ -134,10 +134,11 @@ class SkrillPaymentController extends Controller
         $currency = $request->currency;
         $status = $request->status;
 
-        $invoice_id = $request->invoice_id ?? null; // custom field
-        $order_from = $request->site_name ?? null; // custom field
-        $customer_id = $request->customer_id ?? null; // custom field
-        $customer_email = $request->customer_email ?? null; // custom field
+        // custom fields
+        $invoice_id = $request->invoice_id ?? null;
+        $order_from = $request->site_name ?? null;
+        $customer_id = $request->customer_id ?? null;
+        $customer_email = $request->customer_email ?? null;
 
         // status message
         if ($status == '-2') {
